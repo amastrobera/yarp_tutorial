@@ -5,15 +5,15 @@
 #
 
 from sys import exit
-from yarp import NetworkBase, Port, Bottle # I prefer the static version of Network
+from yarp import Network, Port, Bottle
 
-NetworkBase.initMinimum() #instead of: n = Network()
+n = Network() #calls NetworkBase.initMinimum() and fini() in destructor
 p = Port()
 if not p.open("/server"):
     print "error opening the port /server"
     exit(1)
 
-NetworkBase.connect("/server", "/client") #instead of n.connect("/server", "/client")
+n.connect("/server", "/client")
 
 i = 0
 while i < 100:
