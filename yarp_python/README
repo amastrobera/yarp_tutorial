@@ -1,0 +1,7 @@
+# use this tutorial to install python via SWIG
+# http://www.yarp.it/yarp_swig.html#yarp_swig_python
+#
+# launch and test
+# $ yarp server (t1)
+# $ python reader.py (t2)
+# $ python writer.py (t3)
