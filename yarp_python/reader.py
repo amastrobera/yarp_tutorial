@@ -5,9 +5,9 @@
 #
 
 from sys import exit
-from yarp import Network, Port, Bottle
+from yarp import NetworkBase, Port, Bottle # I prefer the static NetWork
 
-n = Network()
+NetworkBase.initMinimum() #n = Network()
 p = Port()
 if not p.open("/client"):
     print "error opening the port /server"
