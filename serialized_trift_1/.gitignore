@@ -1,0 +1,6 @@
+*_index*
+SharedData.cpp
+SharedData.h
+*.cmake
+src
+include
