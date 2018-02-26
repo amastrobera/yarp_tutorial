@@ -1,0 +1,10 @@
+*_index*
+*.cmake
+src
+include
+cmake_*
+CMake*
+idl
+_yarp*
+yarpy
+Makefile
