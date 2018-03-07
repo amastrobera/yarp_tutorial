@@ -1,2 +1,4 @@
 */build/*
 */*.pyc
+*package-lock.json
+*.txt.user

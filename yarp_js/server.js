@@ -1,19 +1,47 @@
-// launch from the terminal with 
-// $ yarp server (t1)
-// $ node server.js (t2)
+let yarp = require("../../yarp_js_angelo/yarp"); // path where you have
+                                                 // downloaded yarp.js
+let port = new yarp.Port('bottle');
+port.open('/data');
 
-var http = require("http");
-var yarp = require("../yarp");
+function MakeReply(request)
+{
+  console.log("Request: " + request.toString());
 
-var port = new yarp.Port('bottle');
-port.open('/yarpjs/example');
+  let bottle = new yarp.Bottle();
 
-var bottle = new yarp.Bottle();
-bottle.fromString('This is a Bottle');
+  // all request -> reply pairs
+  if (request == "coordinates")
+  {
+    //move along a 3D cube 10x10x10
+    let xyz = [Math.floor(Math.random() * 11),
+                Math.floor(Math.random() * 11),
+                Math.floor(Math.random() * 11)];
+    bottle.fromString(xyz); // JSON.stringify(xyz) doesn't work
+  }
+  else if(request == "path")
+  {
+      let arrSize = Math.floor(Math.random() * 10) +1; //1-10 element path
+      let path = Array.from(Array(arrSize),
+                    () => [Math.floor(Math.random() * 11),
+                                Math.floor(Math.random() * 11),
+                                Math.floor(Math.random() * 11)]);
+      bottle.fromString(path);
+  }
+  else
+  {
+    bottle.fromString("Unknown request '" + request.toString() + "'" );
+  }
+  return bottle;
+}
 
-port.write(bottle);
-
-port.onRead(function(msg){
-    console.log('Message received: ' + msg.toString());
+port.onRPC(function(msg){
+  let bottle = MakeReply(msg);
+  console.log("onRPC: " + bottle.toString());
+  port.reply(bottle);
 });
 
+port.onRead(function(msg){
+  let bottle = MakeReply(msg);
+  console.log("onRead: " + bottle.toString());
+  port.reply(bottle);
+});
