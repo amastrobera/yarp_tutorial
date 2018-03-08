@@ -1,0 +1,21 @@
+<package>
+  <name>pub_sub</name>
+
+  <version>1.0</version>
+
+  <contains>
+      <app>publisher</app>
+      <app>subscriber</app>
+  </contains>
+
+  <build_dir>build</build_dir>
+  <include_dir>include</include_dir>
+  <src_dir>src</src_dir>
+  <srv_dir>srv</srv_dir>
+
+  <build_dependencies>
+  </build_dependencies>
+
+  <run_dependencies>
+  </run_dependencies>
+</package>
